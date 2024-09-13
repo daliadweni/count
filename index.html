@@ -1,50 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Countdown Timer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Date Countdown 🌹</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
+
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f0f0f0; /* added a light gray background */
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
     }
 
     .container {
-      max-width: 400px; /* added a max width for better layout */
-      margin: 40px auto; /* added margin for better spacing */
-      padding: 20px; /* added padding for better spacing */
-      background-color: #fff; /* added a white background for the container */
-      border: 1px solid #ddd; /* added a light gray border */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* added a subtle shadow */
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      font-weight: 600;
+      color: #d63384;
     }
 
     #countdown {
       font-size: 48px;
       font-weight: bold;
-      margin: 20px;
+      color: #222;
+      margin: 20px 0;
     }
 
     .countdown-info {
-      display: flex; /* added a flex layout for the countdown info */
-      justify-content: space-between; /* added space between the countdown info */
+      display: flex;
+      justify-content: space-between;
     }
 
     .countdown-info p {
-      font-size: 24px; /* added a smaller font size for the countdown info */
-      margin: 10px; /* added margin for better spacing */
+      font-size: 20px;
+      font-weight: 500;
+      color: #d63384;
+    }
+
+    .countdown-info span {
+      display: block;
+      font-size: 16px;
+      color: #666;
+    }
+
+    /* Adding rose animation */
+    .rose {
+      position: absolute;
+      bottom: -30px;
+      right: -20px;
+      height: 100px;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Responsive layout */
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+      #countdown {
+        font-size: 36px;
+      }
+      .countdown-info p {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1 id="countdown"></h1>
+    <h1>Counting Down to Our First Date 🌹</h1>
+    <div id="countdown"></div>
     <div class="countdown-info">
-      <p id="days"></p>
-      <p id="hours"></p>
-      <p id="minutes"></p>
-      <p id="seconds"></p>
+      <p><span id="days"></span>Days</p>
+      <p><span id="hours"></span>Hours</p>
+      <p><span id="minutes"></span>Minutes</p>
+      <p><span id="seconds"></span>Seconds</p>
     </div>
+    <img src="https://i.imgur.com/VhKXCo5.png" alt="Rose" class="rose">
   </div>
+
   <script>
     const countdownElement = document.getElementById('countdown');
     const daysElement = document.getElementById('days');
@@ -54,25 +110,24 @@
 
     function countdown() {
       const now = new Date();
-      const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-      tomorrow.setHours(7, 10, 0); // set time to 7:10
+      const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1); // Countdown to midnight
 
-      const timeDiff = tomorrow.getTime() - now.getTime();
+      const timeDiff = midnight.getTime() - now.getTime();
+
       const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-      const countdownText = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-      countdownElement.textContent = countdownText;
+      countdownElement.textContent = `${hours}h : ${minutes}m : ${seconds}s`;
 
-      daysElement.textContent = `Days: ${days}`;
-      hoursElement.textContent = `Hours: ${hours}`;
-      minutesElement.textContent = `Minutes: ${minutes}`;
-      secondsElement.textContent = `Seconds: ${seconds}`;
+      daysElement.textContent = days;
+      hoursElement.textContent = hours;
+      minutesElement.textContent = minutes;
+      secondsElement.textContent = seconds;
 
       if (timeDiff <= 0) {
-        countdownElement.textContent = 'Countdown Over!';
+        countdownElement.textContent = 'It’s Date Time! 💖';
       } else {
         setTimeout(countdown, 1000); // update every 1 second
       }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0; /* added a light gray background */
+    }
+
+    .container {
+      max-width: 400px; /* added a max width for better layout */
+      margin: 40px auto; /* added margin for better spacing */
+      padding: 20px; /* added padding for better spacing */
+      background-color: #fff; /* added a white background for the container */
+      border: 1px solid #ddd; /* added a light gray border */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* added a subtle shadow */
+    }
+
+    #countdown {
+      font-size: 48px;
+      font-weight: bold;
+      margin: 20px;
+    }
+
+    .countdown-info {
+      display: flex; /* added a flex layout for the countdown info */
+      justify-content: space-between; /* added space between the countdown info */
+    }
+
+    .countdown-info p {
+      font-size: 24px; /* added a smaller font size for the countdown info */
+      margin: 10px; /* added margin for better spacing */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="countdown"></h1>
+    <div class="countdown-info">
+      <p id="days"></p>
+      <p id="hours"></p>
+      <p id="minutes"></p>
+      <p id="seconds"></p>
+    </div>
+  </div>
+  <script>
+    const countdownElement = document.getElementById('countdown');
+    const daysElement = document.getElementById('days');
+    const hoursElement = document.getElementById('hours');
+    const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
+
+    function countdown() {
+      const now = new Date();
+      const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      tomorrow.setHours(7, 10, 0); // set time to 7:10
+
+      const timeDiff = tomorrow.getTime() - now.getTime();
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+      const countdownText = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+      countdownElement.textContent = countdownText;
+
+      daysElement.textContent = `Days: ${days}`;
+      hoursElement.textContent = `Hours: ${hours}`;
+      minutesElement.textContent = `Minutes: ${minutes}`;
+      secondsElement.textContent = `Seconds: ${seconds}`;
+
+      if (timeDiff <= 0) {
+        countdownElement.textContent = 'Countdown Over!';
+      } else {
+        setTimeout(countdown, 1000); // update every 1 second
+      }
+    }
+
+    countdown();
+  </script>
+</body>
+</html>

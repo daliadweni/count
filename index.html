@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>First Date Countdown 🌹</title>
+  <title>Second Date Countdown 🌹</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap');
 
@@ -15,6 +15,8 @@
       height: 100vh;
       margin: 0;
       background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      overflow: hidden;
+      position: relative;
     }
 
     .container {
@@ -27,6 +29,17 @@
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
       position: relative;
       transition: transform 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 2s forwards, glow 2s infinite alternate ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 20px #ff6b81; }
+      100% { box-shadow: 0 0 40px #ff6b81; }
     }
 
     .container:hover {
@@ -46,6 +59,13 @@
       font-weight: bold;
       color: #333;
       margin: 20px 0;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
 
     .countdown-info {
@@ -66,6 +86,50 @@
       color: #666;
     }
 
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      animation: floatHearts 5s infinite ease-in-out;
+      font-size: 48px;
+      color: #ff6b81;
+    }
+
+    .heart:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .heart:nth-child(2) {
+      top: 20%;
+      left: 80%;
+      animation-delay: 1s;
+    }
+
+    .heart:nth-child(3) {
+      top: 50%;
+      left: 50%;
+      animation-delay: 2s;
+    }
+
+    .heart:nth-child(4) {
+      top: 70%;
+      left: 20%;
+      animation-delay: 3s;
+    }
+
+    .heart:nth-child(5) {
+      top: 85%;
+      left: 70%;
+      animation-delay: 4s;
+    }
+
+    @keyframes floatHearts {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-30px); opacity: 0.7; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
     /* Adding rose animation */
     .rose {
       position: absolute;
@@ -75,10 +139,77 @@
       animation: float 6s infinite ease-in-out;
     }
 
+    /* Extra floating roses */
+    .rose.left {
+      right: auto;
+      left: -30px;
+    }
+
+    .rose.top {
+      bottom: auto;
+      top: -40px;
+    }
+
     @keyframes float {
       0% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
       100% { transform: translateY(0); }
+    }
+
+    /* Background particle animation */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particles .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      animation: drift 10s infinite linear;
+      opacity: 0.6;
+    }
+
+    .particles .particle:nth-child(1) {
+      width: 10px;
+      height: 10px;
+      top: 20%;
+      left: 30%;
+      animation-duration: 12s;
+    }
+
+    .particles .particle:nth-child(2) {
+      width: 15px;
+      height: 15px;
+      top: 50%;
+      left: 60%;
+      animation-duration: 15s;
+    }
+
+    .particles .particle:nth-child(3) {
+      width: 12px;
+      height: 12px;
+      top: 80%;
+      left: 40%;
+      animation-duration: 10s;
+    }
+
+    .particles .particle:nth-child(4) {
+      width: 18px;
+      height: 18px;
+      top: 30%;
+      left: 70%;
+      animation-duration: 14s;
+    }
+
+    @keyframes drift {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
     }
 
     /* Responsive layout */
@@ -97,7 +228,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Counting Down to Our First Date 🌹</h1>
+    <h1>Counting Down to Our Second Date 🌹</h1>
     <div id="countdown"></div>
     <div class="countdown-info">
       <p><span id="days"></span>Days</p>
@@ -106,7 +237,27 @@
       <p><span id="seconds"></span>Seconds</p>
     </div>
     <div class="rose">🌹</div>
+    <div class="rose left">🌹</div>
+    <div class="rose top">🌹</div>
+    <a href="https://romantic-date-ideas.com" target="_blank" style="text-decoration: none; color: #ff6b81; font-size: 18px; margin-top: 20px; display: inline-block;">Plan the Perfect Date 💖</a>
   </div>
+
+  <!-- Hearts floating animation -->
+  <div class="heart">💖</div>
+  <div class="heart">💖</div>
+  <div class="heart">💖</div>
+  <div class="heart">💖</div>
+  <div class="heart">💖</div>
+
+  <!-- Background particle effect -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <audio id="romanticSound" src="https://www.example.com/romantic-sound.mp3" preload="auto"></audio>
 
   <script>
     const countdownElement = document.getElementById('countdown');
@@ -114,14 +265,13 @@
     const hoursElement = document.getElementById('hours');
     const minutesElement = document.getElementById('minutes');
     const secondsElement = document.getElementById('seconds');
+    const sound = document.getElementById('romanticSound');
 
     function countdown() {
       const now = new Date();
-      const tomorrow = new Date();
-      tomorrow.setDate(now.getDate() + 1);
-      tomorrow.setHours(7, 20, 0, 0); // Set to tomorrow at 7:20 AM (صباح)
+      const secondDate = new Date('2024-09-30T19:00:00'); // Second date: September 30, 2024 at 7:00 PM
 
-      const timeDiff = tomorrow.getTime() - now.getTime();
+      const timeDiff = secondDate.getTime() - now.getTime();
 
       const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -137,6 +287,7 @@
 
       if (timeDiff <= 0) {
         countdownElement.textContent = 'It’s Date Time! 💖';
+        sound.play(); // Play romantic sound when countdown reaches zero
       } else {
         setTimeout(countdown, 1000); // update every 1 second
       }
